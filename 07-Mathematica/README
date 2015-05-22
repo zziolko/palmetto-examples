@@ -1,0 +1,9 @@
+1. Prepare Mathematica input file, Example.m is used 
+for this test
+
+2. Examine the submit script job.sh and adjust the name
+of the input and output files and the requested hardware
+
+3. Submit the job
+
+qsub job.sh
