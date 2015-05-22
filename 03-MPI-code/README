@@ -1,0 +1,13 @@
+1. Load modules needed for compilation
+
+module load gcc/4.8.1 openmpi/1.6.4
+
+2. Compile the code
+
+mpicc pi_mpi.c -o pi.x 
+
+3. Prepare/Verify the submit script
+
+4. Submit the job
+
+qsub job.sh
