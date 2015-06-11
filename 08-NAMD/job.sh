@@ -8,4 +8,4 @@
 module load namd/20150610
 
 cd $PBS_O_WORKDIR
-mpirun namd2 ++ppn 2 alanin > alanin.output
+mpirun namd2 +ppn 2 alanin > alanin.output
