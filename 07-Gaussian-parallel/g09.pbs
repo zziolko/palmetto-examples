@@ -1,8 +1,6 @@
 #!/bin/bash
 #
 #PBS -N g09
-#PBS -M zziolko@clemson.edu
-#PBS -m ae
 #PBS -l select=2:ncpus=2
 #PBS -l walltime=00:15:00
 #PBS -l place=scatter
