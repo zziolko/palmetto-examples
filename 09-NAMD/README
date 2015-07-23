@@ -3,7 +3,7 @@ case from source code of NAMD package.
 
 2. Inspect job.sh file and adjust the resources and input file 
 
-Note that we are specifying "mpiprocs=1" and add "++ppn 2" in the 
+Note that we are specifying "mpiprocs=1" and add "+ppn 2" in the 
 execution line. This part takes care of shared memory parallelism.
 
 3. Submit job using command

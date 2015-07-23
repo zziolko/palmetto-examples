@@ -1,0 +1,52 @@
+#!/bin/bash
+#
+#PBS -N g09
+#PBS -M zziolko@clemson.edu
+#PBS -m ae
+#PBS -l select=2:ncpus=2
+#PBS -l walltime=00:15:00
+#PBS -l place=scatter
+
+# user prepared input file
+input=ch4.inp
+
+# start
+module load gaussian/g09
+
+filename=`basename $input .inp`
+cd $PBS_O_WORKDIR
+
+export GAUSS_LFLAGS='-opt "Tsnet.Node.lindarsharg: ssh"'
+
+# prepare a local scratch dirs
+nodes=`cat $PBS_NODEFILE`
+scratch="/local_scratch/$USER.$PBS_JOBID"
+for i in $nodes
+do
+  ssh $i "mkdir $scratch"
+done
+export GAUSS_SCRDIR=$scratch
+
+# Augment the input file by the Linda and Shared parallelization
+# option 
+tmpinput=${filename}_tmp.inp
+nodelist=`cat $PBS_NODEFILE | uniq | tr '\n' "," | sed 's|,$||'`
+echo "%NProcShared=" $OMP_NUM_THREADS > $tmpinput
+echo "%LindaWorkers=" $nodelist >> $tmpinput
+cat $input >> $tmpinput
+
+# run Gaussian 09
+g09 $tmpinput
+
+# rename output file
+rm $tmpinput
+mv ${filename}_tmp.log ${filename}.log
+
+# clean the local scratch directories
+for i in $nodes
+do
+  ssh $i "rm -r $scratch"
+done
+
+# end
+
