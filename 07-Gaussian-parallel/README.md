@@ -5,6 +5,14 @@
    per node, the script will make sure that Gaussian is aware of all 
    of them.
 
+   In `g09.pbs` script, the lines 
+
+    # user prepared input file
+    input=ch4.inp
+
+   define Gaussian input file. Change `input=ch4.inp` giving the
+   name of your input file (with `.inp` extension).
+
 3. Submit job
 
   $ qsub g09.pbs
