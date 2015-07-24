@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#PBS -N scalapack
+#PBS -l select=3:ncpus=2:mpiprocs=2:interconnect=fdr:mem=10gb
+#PBS -l walltime=00:30:00
+#PBS -j oe
+
+module load intel/15.0
+module load openmpi/1.8.4
+
+cd $PBS_O_WORKDIR
+
+mpirun ./example.x  > output.txt
+
