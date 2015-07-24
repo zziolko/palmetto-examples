@@ -7,15 +7,15 @@
 
    In `g09.pbs` script, the lines 
 
-      # user prepared input file
-      input=ch4.inp
+        # user prepared input file
+        input=ch4.inp
 
    define Gaussian input file. Change `input=ch4.inp` giving the
    name of your input file (with `.inp` extension).
 
 3. Submit job
 
-      $ qsub g09.pbs
+        $ qsub g09.pbs
 
 4. After the job has finished, examine the results, `ch4.log` in our case.
    If the calculation completed you will notice message at the end 
