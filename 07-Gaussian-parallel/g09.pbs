@@ -19,10 +19,9 @@ export GAUSS_LFLAGS='-opt "Tsnet.Node.lindarsharg: ssh"'
 # prepare a local scratch dirs
 nodes=`cat $PBS_NODEFILE`
 scratch="/local_scratch/$USER.$PBS_JOBID"
-for i in $nodes
-do
-  ssh $i "mkdir $scratch"
-done
+
+pbsdsh -- mkdir $scratch
+
 export GAUSS_SCRDIR=$scratch
 
 # Augment the input file by the Linda and Shared parallelization
@@ -41,10 +40,8 @@ rm $tmpinput
 mv ${filename}_tmp.log ${filename}.log
 
 # clean the local scratch directories
-for i in $nodes
-do
-  ssh $i "rm -r $scratch"
-done
+
+pbsdsh -- rm -r $scratch
 
 # end
 
