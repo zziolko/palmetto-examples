@@ -11,7 +11,7 @@ and MPI+GPU enabled `pw-gpu.x`.
   processes per node) and 2 GPUs per node. Quantum Espresso is available via `espresso/5.4` 
   module
 
-        module load espresso/5.4
+      module load espresso/5.4
 
   We will run the same example using standard and GPU enabled version, both of them
   are started in similar form 
