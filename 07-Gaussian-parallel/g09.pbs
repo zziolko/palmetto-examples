@@ -17,10 +17,13 @@ cd $PBS_O_WORKDIR
 export GAUSS_LFLAGS='-opt "Tsnet.Node.lindarsharg: ssh"'
 
 # prepare a local scratch dirs
-nodes=`cat $PBS_NODEFILE`
+nodes=`cat $PBS_NODEFILE | uniq`
 scratch="/local_scratch/$USER.$PBS_JOBID"
 
-pbsdsh -- mkdir $scratch
+for i in $nodes
+do
+  ssh $i "mkdir $scratch"
+done
 
 export GAUSS_SCRDIR=$scratch
 
@@ -40,8 +43,10 @@ rm $tmpinput
 mv ${filename}_tmp.log ${filename}.log
 
 # clean the local scratch directories
-
-pbsdsh -- rm -r $scratch
+for i in $nodes
+do
+  ssh $i "rm -rf $scratch"
+done
 
 # end
 
